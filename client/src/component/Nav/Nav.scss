@@ -1,0 +1,20 @@
+@use "../../assets/styles/partials/globals" as *;
+@use "../../assets/styles/partials/mixins" as *;
+@use "../../assets/styles/partials/typography" as *;
+@use "../../assets/styles/partials/variables" as *;
+
+.nav {
+  position: fixed;
+  padding: 1rem 0rem;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  background: $defColor;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    background: transparent;
+}
