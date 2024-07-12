@@ -1,0 +1,38 @@
+@use "../../assets/styles/partials/globals" as *;
+@use "../../assets/styles/partials/mixins" as *;
+@use "../../assets/styles/partials/typography" as *;
+@use "../../assets/styles/partials/variables" as *;
+
+.closet-page {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid black;
+    padding: 1rem;
+    align-items: center;
+    gap: 1rem;
+    overflow: auto;
+    white-space: no-wrap;
+    width: 95%;
+    margin: 0 auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__search {
+    width: 100%;
+  }
+
+  &__nav {
+    display: flex;
+    width: 100%;
+  }
+
+  &__filter {
+    border: none;
+    white-space: no-wrap;
+    cursor: pointer;
+  }
+}
