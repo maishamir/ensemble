@@ -1,3 +1,6 @@
+import initKnex from "knex";
+import configuration from './knexfile.js';
+const knex = initKnex(configuration);
 import express from "express";
 const app = express();
 const PORT = 3000
