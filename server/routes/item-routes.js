@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getRecentClothingItems,
   createClothingItem,
   uploadImage,
   getClothingItems,
@@ -10,7 +11,8 @@ import {
 const router = express.Router();
 
 router.route("/").get(getClothingItems).post(createClothingItem);
-router.route("/upload", uploadImage);
+router.route("/recent").get(getRecentClothingItems);
+router.route("/upload").post(uploadImage);
 router
   .route("/:id")
   .get(getClothingItemById)
