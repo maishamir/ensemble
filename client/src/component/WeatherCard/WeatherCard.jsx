@@ -1,14 +1,33 @@
-import React from 'react'
-import './WeatherCard.scss'
-import { TiWeatherDownpour } from "react-icons/ti";
+import React, { useEffect, useState } from "react";
+import "./WeatherCard.scss";
+import axios from "axios";
 
-function WeatherCard() {
+function WeatherCard({ description, suggestion }) {
+  const [weather, setWeather] = useState(null);
+  const [iconURL, setIconURL] = useState("");
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:3000/weather");
+        setWeather(data);
+
+        const iconCode = data.weather[0].icon;
+        const iconSrc = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        setIconURL(iconSrc);
+      } catch (e) {
+        console.error(`Error fetching icon data: ${e}`);
+      }
+    };
+    fetchWeather();
+  }, []);
+
   return (
-      <div className='weather-card'>
-          <TiWeatherDownpour /> 
-          <p>It's raining! How about an umbrella and a cozy windbreaker?</p>
-      </div>
-  )
+    <div className="weather-card">
+      {iconURL && <img src={iconURL} alt="Weather icon" />}
+      <p>{suggestion}</p>
+    </div>
+  );
 }
 
-export default WeatherCard
+export default WeatherCard;

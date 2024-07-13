@@ -4,13 +4,21 @@
 @use "../../assets/styles/partials/variables" as *;
 
 .nav {
-  position: fixed;
-  padding: 1rem 0rem;
-  bottom: 0;
+  position: sticky;
+  background: rgba(200, 230, 201, 0.5);
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
-  background: $defColor;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  align-items: center;
+  backdrop-filter: blur(10px);
+
+  &__links {
+    display: flex;
+    // border: 1px solid red;
+    width: 35%;
+    justify-content: space-around;
+  }
 }
 
 a {

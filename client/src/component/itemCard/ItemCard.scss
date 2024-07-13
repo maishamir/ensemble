@@ -3,17 +3,7 @@
 @use "../../assets/styles/partials/typography" as *;
 @use "../../assets/styles/partials/variables" as *;
 
-
-.home-page {
-    width: 75%;
-    margin: 0 auto;
-    margin-top: 5rem;
-
-    &__greeting {
-        text-align: center;
-    }
-
-    &__items {
-        
-    }
+.item-card {
+    height: 300px;
+    border: 1px solid red;
 }

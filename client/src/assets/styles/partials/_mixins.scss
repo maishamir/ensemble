@@ -1,0 +1,20 @@
+@use "./globals" as *;
+@use "./typography" as *;
+@use "./variables" as *;
+
+@mixin primButton {
+    border-radius: 4px;
+    border: none;
+    padding: 1rem;
+    background: $cozyBlue;
+    width: 80%;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+@mixin inputs {
+
+}
