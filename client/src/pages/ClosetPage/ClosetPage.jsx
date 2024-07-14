@@ -8,7 +8,7 @@ function ClosetPage() {
       <header className="closet-page__header">
         {/* <Link to="/">&lt;</Link>
         <h1 className="closet-page__title">Closet</h1> */}
-        <nav class="closet-page__nav">
+        <nav className="closet-page__nav">
           <button className="closet-page__filter">All</button>
           <button className="closet-page__filter">Tops</button>
           <button className="closet-page__filter">Bottoms</button>
@@ -36,7 +36,7 @@ function ClosetPage() {
       </header>
       <div className="results">
         {/* <p>{childData.label}</p> */}
-        <div class="closet-age__results">Results show up here...</div>
+        <div className="closet-age__results">Results show up here...</div>
       </div>
     </main>
   );

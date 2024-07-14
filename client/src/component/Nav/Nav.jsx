@@ -4,8 +4,8 @@ import "./Nav.scss";
 
 function Nav() {
   return (
-    <header class="nav">
-      <h1 class="nav__logo">ensemble</h1>
+    <header className="nav">
+      <h1 className="nav__logo">ensemble</h1>
       <div className="nav__links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/closet">Closet</NavLink>

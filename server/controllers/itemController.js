@@ -1,8 +1,14 @@
 import initKnex from "knex";
 import configuration from "../knexfile.js";
 const knex = initKnex(configuration);
+import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { log } from "console";
+
+// setup multer to use memory storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const getRecentClothingItems = async (req, res) => {
   try {
@@ -17,7 +23,7 @@ const getRecentClothingItems = async (req, res) => {
 const createClothingItem = async (req, res) => {
   try {
     const { name, category, size } = req.body;
-    const [id] = await knex("clothing_item").insert({ name, category, size });
+    const [id] = await knex("clothing_item").insert({ name, category, size })
     res.status(201).json({ id });
   } catch (error) {
     console.error(`System error creating clothing item: ${error}`);
@@ -27,41 +33,37 @@ const createClothingItem = async (req, res) => {
 
 const uploadImage = async (req, res) => {
   try {
-    const { image, clothingItemId } = req.body;
-
-    if (!image || !clothingItemId) {
-      return res.status(400).json({ message: "Image and clothingItemId are required." });
+    if (!req.file) {
+      throw new Error("No file uploaded");
     }
 
-    console.log('Received image for clothing item ID:', clothingItemId);
+    const { originalname, buffer, mimetype } = req.file;
+    const { clothingItemId } = req.body;
 
-    const base64URL = image.replace(/^data:image\/png;base64,/, "");
-
-    const imageName = `${Date.now()}.jpg`;
-    const imageURL = path.join(__dirname, "..", "uploads", imageName);
-
-    const uploadsDir = path.join(__dirname, "..", "uploads");
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir);
+    if (!clothingItemId) {
+      return res.status(400).json({ message: "clothingItemId is required." });
     }
 
-    console.log('Saving image to:', imageURL);
-    await fs.promises.writeFile(imageURL, base64URL, "base64");
+    console.log('Uploaded image details:', { originalname, buffer, mimetype });
+    console.log('Uploaded image for clothing item id:', clothingItemId);
 
-    const imagePath = `/uploads/${imageName}`;
+    const imagePath = `/uploads/${originalname}`;
 
-    console.log('Updating clothing item with image path:', imagePath);
-    await knex("clothing_item")
-      .where({ id: clothingItemId })
-      .update({ image_url: imagePath });
+    await knex('clothing_item').where({ id: clothingItemId }).update({
+      image_name: originalname,
+      image_data: buffer,
+      image_mimetype: mimetype,
+      image_url: imagePath,
+    });
 
     res.status(200).json({
-      message: "Image uploaded successfully",
+      message: "Image uploaded and stored in db",
       path: imagePath,
+      clothingId: clothingItemId
     });
   } catch (e) {
-    console.error('Error uploading image:', e);
-    res.status(500).json({ message: `Error uploading image: ${e.message}` });
+    console.error("Error uploading image: ", e);
+    res.status(500).json({ message: "Error uploading image", error: e.message });
   }
 };
 
@@ -83,7 +85,7 @@ const getClothingItemById = async (req, res) => {
     if (item) {
       res.status(200).json(item);
     } else {
-      res.status(404).json({ message: "item not found" });
+      res.status(404).json({ message: "Item not found" });
     }
   } catch (e) {
     console.error(`Error retrieving item: ${e}`);

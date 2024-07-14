@@ -24,7 +24,7 @@ function RecentItems() {
   return (
     <section className="recent-items">
           <p className="recent-items__title">Recent Items</p>
-          <div class="recent-items__images">
+          <div className="recent-items__images">
         {/* {recentItems.map(item => ( */}
           {/* <img key={item.id} src={item.image_url} className="recent-items__image" alt={item.name} /> */ }
         {recentItems.map(item => (

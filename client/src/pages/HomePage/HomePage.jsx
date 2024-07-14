@@ -71,7 +71,7 @@ function HomePage() {
         />
       )}
 
-      <div class="home-page__items">
+      <div className="home-page__items">
         <RecentItems />
         <Favourites />
       </div>

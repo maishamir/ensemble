@@ -5,7 +5,7 @@ function Favourites() {
   return (
     <section className="favourites">
           <p className="favourites__title">Favourites</p>
-          <div class="favourites__images">
+          <div className="favourites__images">
               <img src="https://unsplash.it/90/90" className="favourites__image" alt=""/>
               <img src="https://unsplash.it/90/90" className="favourites__image" alt=""/>
               <img src="https://unsplash.it/90/90" className="favourites__image" alt=""/>
