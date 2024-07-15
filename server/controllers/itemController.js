@@ -4,7 +4,12 @@ const knex = initKnex(configuration);
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import { log } from "console";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 // setup multer to use memory storage
 const storage = multer.memoryStorage();
@@ -47,18 +52,23 @@ const uploadImage = async (req, res) => {
     console.log('Uploaded image details:', { originalname, buffer, mimetype });
     console.log('Uploaded image for clothing item id:', clothingItemId);
 
-    const imagePath = `/uploads/${originalname}`;
+    const imagePath = path.join(__dirname, '..', 'uploads', originalname);
+
+    // Save the file to the uploads directory
+    fs.writeFileSync(imagePath, buffer);
+
+    const imageUrl = `http://localhost:3000/uploads/${originalname}`; // Construct the full URL
 
     await knex('clothing_item').where({ id: clothingItemId }).update({
       image_name: originalname,
       image_data: buffer,
       image_mimetype: mimetype,
-      image_url: imagePath,
+      image_url: imageUrl,
     });
 
     res.status(200).json({
       message: "Image uploaded and stored in db",
-      path: imagePath,
+      path: imageUrl,
       clothingId: clothingItemId
     });
   } catch (e) {
@@ -66,6 +76,7 @@ const uploadImage = async (req, res) => {
     res.status(500).json({ message: "Error uploading image", error: e.message });
   }
 };
+
 
 const getClothingItems = async (req, res) => {
   try {

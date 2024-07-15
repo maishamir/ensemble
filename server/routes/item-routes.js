@@ -24,4 +24,5 @@ router
   .put(updateClothingItem)
   .delete(deleteClothingItem);
 
+
 export default router;

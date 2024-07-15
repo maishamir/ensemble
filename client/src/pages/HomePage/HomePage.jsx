@@ -3,8 +3,8 @@ import { useState } from "react";
 import "./HomePage.scss";
 import WeatherCard from "../../component/WeatherCard/WeatherCard";
 import RecentItems from "../../component/RecentItems/RecentItems";
-import Favourites from "../../component/Favourites/Favourites";
 import axios from "axios";
+import RecentOutfits from "../../component/RecentOutfits/RecentOutfits";
 
 function HomePage() {
   const [recentItems, setRecentItems] = useState([]);
@@ -12,25 +12,6 @@ function HomePage() {
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
-    const fetchRecentClothingItems = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/clothing_item/recent"
-        );
-        setRecentItems(response.data);
-      } catch (e) {
-        console.error("Error fetching recent items:", e);
-      }
-    };
-
-    const fetchRecentRecentOutfits = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/outfit/recent");
-        setRecentOutfits(response.data);
-      } catch (e) {
-        console.error("Error fetching recent outfits:", e);
-      }
-    };
 
     const fetchWeather = async () => {
       try {
@@ -40,9 +21,6 @@ function HomePage() {
         console.error("Error fetching weather data:", e);
       }
     };
-
-    fetchRecentClothingItems();
-    fetchRecentRecentOutfits();
     fetchWeather();
   }, []);
 
@@ -73,7 +51,7 @@ function HomePage() {
 
       <div className="home-page__items">
         <RecentItems />
-        <Favourites />
+        <RecentOutfits />
       </div>
     </main>
   );

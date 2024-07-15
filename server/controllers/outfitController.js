@@ -4,8 +4,18 @@ const knex = initKnex(configuration);
 
 const createOutfit = async (req, res) => {
   try {
-    const { date, description, clothing_item_ids, images } = req.body;
-    const [id] = await knex('outfit').insert({ date, description, clothing_item_ids, images });
+    const { date, description, clothing_item_ids } = req.body;
+    const thumbnail = req.body.thumbail || '';
+
+    const formattedDate = new Date(date).toISOString().slice(0, 19).replace('T', ' ');
+
+    const clothingItems = JSON.stringify(clothing_item_ids)
+    const [id] = await knex('outfit').insert({
+      date: formattedDate,
+      description,
+      clothing_item_ids: clothingItems,
+      thumbnail
+    });
     res.status(201).json({ id });
   } catch (e) {
     console.error(`Error creating outfit: ${e}`);

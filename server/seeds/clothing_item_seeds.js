@@ -40,7 +40,7 @@ export async function seed(knex) {
       category: "Accessory",
       size: "One-Size",
       image_url:
-        "https://i.pinimg.com/originals/f7/d4/ce/f7d4ceb801fd36407fd22cfb5472722f.jpg",
+        "https://i.pinimg.com/564x/7f/b1/12/7fb1121d59fd4bd24c92df173fd430fb.jpg",
     },
     {
       id: 6,
@@ -48,7 +48,7 @@ export async function seed(knex) {
       category: "Dress",
       size: "S",
       image_url:
-        "https://i.pinimg.com/originals/8c/9e/8f/8c9e8fce43c7d1c6df5c0348e7b2a93c.jpg",
+        "https://i.pinimg.com/564x/7c/04/61/7c0461f9b34158462ccebc70beeb4a0b.jpg",
     },
     {
       id: 7,
@@ -56,7 +56,7 @@ export async function seed(knex) {
       category: "Footwear",
       size: "L",
       image_url:
-        "https://i.pinimg.com/originals/09/5e/22/095e226c1e0bfb30fd2a7d0d4ad8a9a0.jpg",
+        "https://i.pinimg.com/564x/3e/e8/59/3ee8591bb02b564ad46251f64493d9d9.jpg",
     },
     {
       id: 8,
@@ -64,7 +64,7 @@ export async function seed(knex) {
       category: "Top",
       size: "L",
       image_url:
-        "https://i.pinimg.com/originals/41/a0/2f/41a02f02d8adbd5c7381d29bc5e1a2b6.jpg",
+        "https://i.pinimg.com/564x/28/80/7f/28807f4f511ddbc8897ba3c6721f52ca.jpg",
     },
     {
       id: 9,
@@ -72,7 +72,7 @@ export async function seed(knex) {
       category: "Bottom",
       size: "M",
       image_url:
-        "https://i.pinimg.com/originals/b0/6e/4e/b06e4e3c3b7d48a8b142c98b23d8f7c6.jpg",
+        "https://i.pinimg.com/736x/9d/de/76/9dde760e09ca02a290c91d3e6e18859d.jpg",
     },
     {
       id: 10,
@@ -80,7 +80,7 @@ export async function seed(knex) {
       category: "Accessory",
       size: "One-Size",
       image_url:
-        "https://i.pinimg.com/originals/12/3b/37/123b37a63a2a7418e7d23305cfc37e14.jpg",
+        "https://i.pinimg.com/564x/09/d0/00/09d0008b98a5b67ee749a0809d134ab4.jpg",
     },
     {
       id: 11,
@@ -88,7 +88,7 @@ export async function seed(knex) {
       category: "Bottom",
       size: "S",
       image_url:
-        "https://i.pinimg.com/originals/2f/0a/3b/2f0a3b8e7f1c0b7b82b8a3f6f5e8a62f.jpg",
+        "https://i.pinimg.com/564x/17/4f/0a/174f0a1bad3b86da9290f94a01c3d425.jpg",
     },
     {
       id: 12,
@@ -96,7 +96,7 @@ export async function seed(knex) {
       category: "Top",
       size: "M",
       image_url:
-        "https://i.pinimg.com/originals/d6/5b/27/d65b27c1eb7ad34e31c9f26b1b88c9c1.jpg",
+        "https://i.pinimg.com/564x/54/bb/74/54bb7439ff1ed9b8c24fd1771dfe00a4.jpg",
     },
     {
       id: 13,
@@ -104,7 +104,7 @@ export async function seed(knex) {
       category: "Top",
       size: "XL",
       image_url:
-        "https://i.pinimg.com/originals/3a/1b/23/3a1b23a84b5f09c5f1b393f547b5e228.jpg",
+        "https://i.pinimg.com/736x/d0/f1/64/d0f164041939f814b207530c97f1f8d9.jpg",
     },
     {
       id: 14,
@@ -112,7 +112,7 @@ export async function seed(knex) {
       category: "Dress",
       size: "M",
       image_url:
-        "https://i.pinimg.com/originals/43/c2/8d/43c28d0b8e6f88f8a2e9c8c2e7a2a2d4.jpg",
+        "https://i.pinimg.com/564x/b5/ad/02/b5ad0245a81999a8366b1ed5f4ed9a6b.jpg",
     },
     {
       id: 15,
@@ -120,7 +120,7 @@ export async function seed(knex) {
       category: "Footwear",
       size: "M",
       image_url:
-        "https://i.pinimg.com/originals/a8/7e/4c/a87e4c7c0b6d4a9a8b4a1f7b9a1a6b9a.jpg",
+        "https://i.pinimg.com/736x/b9/58/ee/b958ee7b5511daf6d06767cfe33e8737.jpg",
     },
     {
       id: 16,
@@ -128,7 +128,7 @@ export async function seed(knex) {
       category: "Footwear",
       size: "L",
       image_url:
-        "https://i.pinimg.com/originals/78/7d/4d/787d4d3f8e6f88f8a2e9c8c2e7a2a2d4.jpg",
+        "https://i.pinimg.com/564x/71/78/03/71780344d61b42b66b9089e24365cac3.jpg",
     },
     {
       id: 17,
@@ -136,7 +136,7 @@ export async function seed(knex) {
       category: "Top",
       size: "S",
       image_url:
-        "https://i.pinimg.com/originals/b8/7e/4c/b87e4c7c0b6d4a9a8b4a1f7b9a1a6b9a.jpg",
+        "https://i.pinimg.com/564x/0a/88/1a/0a881a9c2f70c0365b54d2fa192dce64.jpg",
     },
     {
       id: 18,
@@ -144,7 +144,7 @@ export async function seed(knex) {
       category: "Top",
       size: "M",
       image_url:
-        "https://i.pinimg.com/originals/98/7d/4d/987d4d3f8e6f88f8a2e9c8c2e7a2a2d4.jpg",
+        "https://i.pinimg.com/564x/4c/40/3a/4c403a046bbbb6c167a31ea1003cfb83.jpg",
     },
     {
       id: 19,
@@ -152,7 +152,7 @@ export async function seed(knex) {
       category: "Bottom",
       size: "L",
       image_url:
-        "https://i.pinimg.com/originals/a8/7e/4c/a87e4c7c0b6d4a9a8b4a1f7b9a1a6b9a.jpg",
+        "https://i.pinimg.com/564x/16/c9/e9/16c9e9092f802e53d758c3eba2e90e44.jpg",
     },
     {
       id: 20,
@@ -160,7 +160,7 @@ export async function seed(knex) {
       category: "Footwear",
       size: "M",
       image_url:
-        "https://i.pinimg.com/originals/f8/7d/4d/f87d4d3f8e6f88f8a2e9c8c2e7a2a2d4.jpg",
+        "https://i.pinimg.com/564x/79/83/ac/7983acca34b2b1d86f3d77238f1ebb5a.jpg",
     },
   ]);
 }

@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ClosetPage from "./pages/ClosetPage/ClosetPage";
 import PlannerPage from "./pages/PlannerPage/PlannerPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<HomePage />} />
+
+          <Route path="/closet/:category" element={<ClosetPage />} />
           <Route path="/closet" element={<ClosetPage />} />
+          <Route path="/item/:id" element={<ItemDetailsPage />} />
           <Route path="/planner" element={<PlannerPage />} />
           <Route path="/add-item" element={<AddItemPage />} />
         </Routes>

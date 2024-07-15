@@ -1,15 +1,21 @@
 @use "../../assets/styles/partials/globals" as *;
 @use "../../assets/styles/partials/mixins" as *;
-
 @use "../../assets/styles/partials/typography" as *;
 @use "../../assets/styles/partials/variables" as *;
 
-.item-card {
-    height: 15rem;
-    width: 35%;
+.recent-outfits {
+
+    &__title {
+        font-weight: 600;
+    }
+    &__images {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1rem 0;
+    }
     
     &__image {
-        height: 100%;
-        object-fit: contain;
+        border-radius: 4px;
+        // height: 200px;/
     }
 }
