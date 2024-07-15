@@ -4,28 +4,32 @@ const knex = initKnex(configuration);
 
 const createOutfit = async (req, res) => {
   try {
-    const { date, description, clothing_item_ids } = req.body;
-    const thumbnail = req.body.thumbail || '';
+    const { date, description, clothing_item_ids, thumbnail, name } = req.body;
 
+    // Format the date
     const formattedDate = new Date(date).toISOString().slice(0, 19).replace('T', ' ');
 
-    const clothingItems = JSON.stringify(clothing_item_ids)
     const [id] = await knex('outfit').insert({
       date: formattedDate,
       description,
-      clothing_item_ids: clothingItems,
-      thumbnail
+      clothing_item_ids,  // Assuming clothing_item_ids is already an array and knex will handle it correctly
+      thumbnail,
+      name,
     });
+
     res.status(201).json({ id });
   } catch (e) {
-    console.error(`Error creating outfit: ${e}`);
+    console.error(`Error creating outfit: ${e.message}`);
     res.status(500).json({ message: `Error creating outfit: ${e.message}` });
   }
-}
+};
+
+
+
 
 const getRecentOutfits = async (req, res) => {
   try {
-    const recents = await knex("outfit").orderBy('created_at', 'desc').limit(5);
+    const recents = await knex("outfit").orderBy('created_at', 'desc').limit(3);
     res.status(200).json(recents);
   } catch (e) {
     console.error(`Error retrieving recent outfits: ${e}`);
@@ -46,16 +50,30 @@ const getOutfits = async (req, res) => {
 const getOutfitById = async (req, res) => {
   try {
     const outfit = await knex("outfit").where({ id: req.params.id }).first();
-    if (outfit) {
-      res.status(200).json(outfit);
-    } else {
-      res.status(404).json({ message: 'outfit not found' });
+
+    if (!outfit) {
+      return res.status(404).json({ message: "Outfit not found" });
     }
+
+    const clothingItemIds = outfit.clothing_item_ids;
+
+    const clothingItems = await knex("clothing_item")
+      .whereIn("id", clothingItemIds)
+      .select("id", "name", "image_url");
+
+    outfit.clothing_items = clothingItems;
+
+    res.status(200).json(outfit);
   } catch (e) {
-    console.error(`Error retrieving outfit: ${e}`);
+    console.error(`Error retrieving outfit: ${e.message}`);
     res.status(500).json({ message: `Error retrieving outfit: ${e.message}` });
   }
-}
+};
+
+
+
+
+
 
 const updateOutfit = async (req, res) => {
   try {

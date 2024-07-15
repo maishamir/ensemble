@@ -44,6 +44,7 @@ function PlannerPage() {
 
     try {
       await axios.post("http://localhost:3000/outfit", {
+        name: outfitName,
         date: new Date().toISOString(),
         description: outfitDescription,
         clothing_item_ids: selectedItems.map((item) => item.id), 

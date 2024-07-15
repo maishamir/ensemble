@@ -4,6 +4,8 @@
 @use "../../assets/styles/partials/variables" as *;
 
 .recent-outfits {
+    display: flex;
+    gap: 1rem;
 
     &__title {
         font-weight: 600;

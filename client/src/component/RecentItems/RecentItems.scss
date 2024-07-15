@@ -4,7 +4,8 @@
 @use "../../assets/styles/partials/variables" as *;
 
 .recent-items {
-
+    display: flex;
+    align-items: flex-start;
     &__title {
         font-weight: 600;
     }
@@ -12,10 +13,5 @@
         display: flex;
         justify-content: space-evenly;
         margin: 1rem 0;
-    }
-    
-    &__image {
-        border-radius: 4px;
-        // height: 200px;/
     }
 }

@@ -7,6 +7,7 @@ import ClosetPage from "./pages/ClosetPage/ClosetPage";
 import PlannerPage from "./pages/PlannerPage/PlannerPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
+import OutfitDetailsPage from "./pages/OutfitDetailsPage/OutfitDetailsPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/item/:id" element={<ItemDetailsPage />} />
           <Route path="/planner" element={<PlannerPage />} />
           <Route path="/add-item" element={<AddItemPage />} />
+          <Route path="/outfit/:id" element={<OutfitDetailsPage />} />
         </Routes>
       </BrowserRouter>
     </>

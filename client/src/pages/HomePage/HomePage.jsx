@@ -7,8 +7,6 @@ import axios from "axios";
 import RecentOutfits from "../../component/RecentOutfits/RecentOutfits";
 
 function HomePage() {
-  const [recentItems, setRecentItems] = useState([]);
-  const [getRecentOutfits, setRecentOutfits] = useState([]);
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
