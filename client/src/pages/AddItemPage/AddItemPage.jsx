@@ -165,8 +165,7 @@ function AddItemPage() {
               onChange={handleImageChange}
               name="file"
               id="file"
-            />{" "}
-            {/* Ensure the field name is 'file' */}
+            />
           </div>
           <button className="add-item__button" type="submit">
             Add Item

@@ -4,13 +4,22 @@ import "./ClosetPage.scss";
 import axios from "axios";
 import ItemCard from "../../component/itemCard/ItemCard";
 
-const categories = ["All", "Top", "Bottom", "Dress", "Footwear", "Accessory"]; // Define categories array
+const categories = [
+  "All Items",
+  "Top",
+  "Bottom",
+  "Dress",
+  "Footwear",
+  "Accessory",
+  "Outfits",
+]; // Define categories array
 
 function ClosetPage() {
   const navigate = useNavigate();
 
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [outfits, setOutfits] = useState([]);
   const { category } = useParams(); // Get the category from the URL
 
   useEffect(() => {
@@ -18,17 +27,29 @@ function ClosetPage() {
       try {
         const { data } = await axios.get("http://localhost:3000/clothing_item");
         setItems(data);
-        filterClothes(category || "All", data);
+        filterClothes(category || "All Items", data);
       } catch (e) {
         console.error(`Could not fetch items: ${e}`);
       }
     };
+
+    const fetchOutfits = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:3000/outfit");
+        setOutfits(data)
+      } catch (e) {
+        console.error("Could not fetch outfits: ", e);
+      }
+    };
     fetchItems();
+    fetchOutfits()
   }, [category]);
 
   const filterClothes = (category, itemsList = items) => {
-    if (category === "All") {
+    if (category === "All Items") {
       setFilteredItems(itemsList);
+    } else if (category === "Outfits") {
+      setFilteredItems([])
     } else {
       const filtered = itemsList.filter(
         (item) => item.category.toLowerCase() === category.toLowerCase()
@@ -36,8 +57,6 @@ function ClosetPage() {
       setFilteredItems(filtered);
     }
   };
-
-  console.log(category, filteredItems);
 
   return (
     <main className="closet-page">
@@ -58,17 +77,25 @@ function ClosetPage() {
         </nav>
       </header>
       <div className="results">
-        <div className="closet-page__results">
+        {category === "Outfits" ? (
+          <div class="closet-page__outfits">
+            {outfits.map(outfit => (
+              <div class="outfit" key={outfit.id} onClick={() => navigate(`/outfit/${outfit.id}`)}>
+                <img src={outfit.thumbnail} alt="" class="closet-page__outfit"/>
+              </div>
+            ))}
+          </div>
+        ) : <div className="closet-page__results">
           {filteredItems.map((item) => (
-            <ItemCard
-              image={item.image_url}
-              name={item.name}
+            <img src={item.image_url}
               alt={item.name}
               onClick={() => navigate(`/item/${item.id}`)}
               key={item.id}
+              className="closet-page__item"
             />
           ))}
-        </div>
+        </div>}
+        
       </div>
     </main>
   );

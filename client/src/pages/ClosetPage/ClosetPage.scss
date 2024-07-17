@@ -5,16 +5,13 @@
 
 .closet-page {
   &__header {
-    display: flex;
-    flex-direction: column;
     // border: 1px solid black;
-    padding: 1rem;
-    align-items: center;
-    gap: 1rem;
-    overflow: auto;
+    background: #80CBC4;
+    padding: 1rem 0.5rem;
     white-space: no-wrap;
-    width: 95%;
-    margin: 0 auto;
+    width: 100%;
+    // margin-left: 1rem;
+    margin-bottom: 1rem;
 
     &::-webkit-scrollbar {
       display: none;
@@ -27,12 +24,35 @@
 
   &__nav {
     display: flex;
-    width: 100%;
+    justify-content: space-evenly;
+    width: 50%;
+
+    a {
+      color: white;
+      font-weight: 600;
+    }
   }
 
   &__filter {
     border: none;
     white-space: no-wrap;
+    cursor: pointer;
+  }
+
+  &__results, &__outfits {
+    // background: orange;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+  }
+
+  &__item, &__outfit {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
     cursor: pointer;
   }
 }

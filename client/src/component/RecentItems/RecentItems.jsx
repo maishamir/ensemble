@@ -23,7 +23,7 @@ function RecentItems() {
   console.log(recentItems)
   return (
     <section className="recent-items">
-          <p className="recent-items__title">Recent Items</p>
+          {/* <p className="recent-items__title">Recent Items</p> */}
           <div className="recent-items__images">
         {/* {recentItems.map(item => ( */}
           {/* <img key={item.id} src={item.image_url} className="recent-items__image" alt={item.name} /> */ }

@@ -12,7 +12,6 @@ function RecentOutfits() {
       try {
         const { data } = await axios.get("http://localhost:3000/outfit/recent");
         setRecentOutfits(data);
-        alert("Fetching recent outfits");
         console.log(recentOutfits);
       } catch (e) {
         console.error("Error fetching recent outfits", e);
@@ -22,7 +21,7 @@ function RecentOutfits() {
   }, []);
   return (
     <section className="recent-outfits">
-      <p className="recent-outfits__title">Recent Outfits</p>
+      {/* <p className="recent-outfits__title">Recent Outfits</p> */}
       <div className="recent-outfits__images">
         {recentOutfits.map((item) => (
           <Link to={`/outfit/${item.id}`}>
