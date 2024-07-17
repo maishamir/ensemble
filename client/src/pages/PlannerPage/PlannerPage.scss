@@ -5,39 +5,71 @@
 
 .outfit-planner {
 
-    &__header{ 
-        display: flex;
-
+    &__form{ 
+        margin: 0 auto 1rem auto;
+        justify-content: center;
+        // border: 1px solid rebeccapurple;
+        width: 30%;
+        gap: 1.5rem;
     }
+
+    &__name, &__description {
+        width: 50%;
+        padding: 0.5rem;
+        font-family: 'Quicksand';
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0.25rem 0;
+    }
+
+    &__description {
+        resize: none;
+        margin: 0 auto;
+    }
+
+    &__button {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Quicksand';
+        padding: 0.5rem 1rem;
+    }
+    
 
     &__container {
         display: flex;
-        justify-content: flex-start;
+        // justify-content: flex-start;
         width: 100%;
     }
-    &__items {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 1rem;
-        margin-top: 1.5rem;
-    }
+    &__available-items {
+        display: flex;
+        // grid-template-columns: repeat(5, 1fr);
+        overflow-x: auto;
+        gap: 2rem;
+        padding: 2rem;
 
-    &__selected-container {
-        background: #d2d2d2;
+        margin: 0rem auto;
     }
 
     &__selected-items {
-        width: 50%;
-        padding: 2rem;
-        margin: 0 auto;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0rem;
+        padding: 1rem;
+        width: 100%;
     }
 
     &__selected {
-        margin-top: 1rem;
+
         display: flex;
         justify-content: center;
         gap: 2rem;
+        padding: 1rem;
+        overflow-x: auto;
+        width: 100%;
+        // flex-wrap: wrap;
     }
 
     &__images {
@@ -46,5 +78,23 @@
         object-fit: cover;
         border-radius: 1rem;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    &__categories {
+        width: 15rem;
+        margin: 0 auto;
+        // border: 1px solid green;
+
+        select {
+            margin: 1rem auto;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+
+        }
+    }
+
+    &__description {
+        padding: 0.5rem;
+
     }
 }

@@ -1,24 +1,52 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./PlannerPage.scss";
 
 function PlannerPage() {
+  const categories = [
+    "All Items",
+    "Top",
+    "Bottom",
+    "Dress",
+    "Footwear",
+    "Accessory",
+  ]; // Define categories array
+
+  const { id } = useParams();
   const [items, setItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [outfitName, setOutfitName] = useState("");
   const [outfitDescription, setOutfitDescription] = useState("");
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All Items");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const { data } = await axios.get("http://localhost:3000/clothing_item");
         setItems(data);
+        filterClothes("All Items", data); // Initialize with "All Items" filter
       } catch (e) {
         console.error("Could not fetch items:", e);
       }
     };
     fetchItems();
-  }, []);
+
+  }, [selectedCategory]);
+
+  const filterClothes = (category, itemsList = items) => {
+    if (category === "All Items") {
+      setFilteredItems(itemsList);
+    } else {
+      const filtered = itemsList.filter(
+        (item) =>
+          item.category && item.category.toLowerCase() === category.toLowerCase()
+      );
+      setFilteredItems(filtered);
+    }
+  };
 
   const handleSelectItem = (item) => {
     if (selectedItems.includes(item)) {
@@ -28,13 +56,20 @@ function PlannerPage() {
     }
   };
 
-  const handleSaveOutfit = async () => {
+  const handleSelectCategory = (e) => {
+    const selectedCategory = e.target.value;
+    setSelectedCategory(selectedCategory);
+    filterClothes(selectedCategory);
+  };
+
+  const handleSaveOutfit = async (e) => {
+    e.preventDefault();
     if (!outfitName) {
       alert("Please enter a name for your outfit.");
       return;
     }
 
-    // set the image of the first item to be the thumbnail
+    // Set the image of the first item to be the thumbnail
     let thumbnail = "";
     if (selectedItems.length > 0) {
       thumbnail = selectedItems[0].image_url;
@@ -43,18 +78,18 @@ function PlannerPage() {
     }
 
     try {
-      await axios.post("http://localhost:3000/outfit", {
+      const response = await axios.post("http://localhost:3000/outfit", {
         name: outfitName,
-        date: new Date().toISOString(),
+        date: new Date().toISOString().slice(0, 19).replace("T", " "),
         description: outfitDescription,
-        clothing_item_ids: selectedItems.map((item) => item.id),
+        clothing_item_ids: JSON.stringify(selectedItems.map((item) => item.id)), // Ensure JSON format
         thumbnail,
       });
 
-      alert("Outfit saved successfully");
       setOutfitName("");
       setOutfitDescription("");
       setSelectedItems([]);
+      navigate('/closet/Outfits')
     } catch (error) {
       console.error("Couldn't save outfit: ", error);
       alert("Couldn't save outfit");
@@ -63,47 +98,25 @@ function PlannerPage() {
 
   return (
     <main className="outfit-planner">
-      <header className="outfit-planner__header">
-        {/* <h1 className="outfit-planner__title">Outfit Planner</h1> */}
-        <input
-          type="text"
-          value={outfitName}
-          onChange={(e) => setOutfitName(e.target.value)}
-          placeholder="Outfit Name"
-          className="outfit-planner__name"
-        />
-        <textarea
-          value={outfitDescription}
-          onChange={(e) => setOutfitDescription(e.target.value)}
-          placeholder="Description"
-          className="outfit-planner__description"
-        ></textarea>
-        <button onClick={handleSaveOutfit} className="outfit-planner__button">
-          Save Outfit
-        </button>
-      </header>
-
-      <div class="outfit-planner__selected-container">
-        <section className="outfit-planner__selected-items">
-          <h2>Selected Items</h2>
-          <div className="outfit-planner__selected">
-            {selectedItems.map((item) => (
-              <img
-                src={item.image_url}
-                alt={item.name}
-                key={item.id}
-                onClick={() => handleSelectItem(item)}
-                className="outfit-planner__images selected"
-              />
-            ))}
-          </div>
-        </section>
+      <div className="outfit-planner__categories">
+        <label htmlFor="categories">Category: </label>
+        <select
+          name="categories"
+          value={selectedCategory}
+          onChange={handleSelectCategory}
+          className="outfit-planner__categoryPicker"
+        >
+          {categories.map((category) => (
+            <option value={category} key={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="outfit-planner__container">
-        <h2>Available Items</h2>
-        <div className="outfit-planner__items">
-          {items.map((item) => (
+        <div className="outfit-planner__available-items">
+          {filteredItems.map((item) => (
             <img
               src={item.image_url}
               onClick={() => handleSelectItem(item)}
@@ -116,6 +129,40 @@ function PlannerPage() {
           ))}
         </div>
       </div>
+
+      <section className="outfit-planner__selected-items">
+        <h2>Selected Items</h2>
+        <div className="outfit-planner__selected">
+          {selectedItems.map((item) => (
+            <img
+              src={item.image_url}
+              alt={item.name}
+              key={item.id}
+              onClick={() => handleSelectItem(item)}
+              className="outfit-planner__images selected"
+            />
+          ))}
+        </div>
+      </section>
+
+      <form className="outfit-planner__form" onSubmit={handleSaveOutfit}>
+        <input
+          type="text"
+          value={outfitName}
+          onChange={(e) => setOutfitName(e.target.value)}
+          placeholder="Outfit Name"
+          className="outfit-planner__name"
+        /> <br/>
+        <textarea
+          value={outfitDescription}
+          onChange={(e) => setOutfitDescription(e.target.value)}
+          placeholder="Description"
+          className="outfit-planner__description"
+        ></textarea> <br />
+        <button type="submit" className="outfit-planner__button">
+          Save Outfit
+        </button>
+      </form>
     </main>
   );
 }

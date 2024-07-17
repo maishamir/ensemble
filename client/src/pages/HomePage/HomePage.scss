@@ -7,13 +7,18 @@
 .home-page {
     width: 75%;
     margin: 0 auto;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+    // background: url(../../assets/images/watercolor.webp);
 
     &__greeting {
         text-align: center;
     }
 
     &__items {
-        
+        margin-top: 2rem;
+        display: flex;
+        // flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
     }
 }

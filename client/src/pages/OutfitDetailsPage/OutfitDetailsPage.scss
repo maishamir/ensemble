@@ -1,0 +1,34 @@
+@use "../../assets/styles/partials/globals" as *;
+@use "../../assets/styles/partials/mixins" as *;
+@use "../../assets/styles/partials/typography" as *;
+@use "../../assets/styles/partials/variables" as *;
+
+.outfit-details {
+  display: flex;
+  // align-items: center;
+  width: 75%;
+  margin: 5rem auto;
+  gap: 1rem;
+
+  &__items {
+    width: 40rem;
+    height: 30rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin: 0 auto;
+  }
+
+  &__info {
+    margin-top: 5rem;
+  }
+
+  &__back-link {
+    width: 3rem;
+    position: absolute;
+    margin-left: -10rem;
+  }
+
+  &__edit {
+    margin-top: 1rem;
+    padding: 0.25rem 1rem;
+  }
+}

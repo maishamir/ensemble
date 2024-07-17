@@ -4,14 +4,30 @@
 @use "../../assets/styles/partials/variables" as *;
 
 .recent-items {
+    width: 100%;
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
+    background: $mutedTeal;
+    backdrop-filter: blur(5px);
+    padding: 1.05rem;
+    border-radius: 1rem;
     &__title {
         font-weight: 600;
+        margin-top: 1rem;
+        font-size: 1.5rem;
+
     }
     &__images {
         display: flex;
         justify-content: space-evenly;
         margin: 1rem 0;
+        gap: 1.5rem;
+    }
+
+    &__item-name {
+        text-align: center;
+        margin-top: 1rem;
+        font-weight: 600;
     }
 }

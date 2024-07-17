@@ -60,7 +60,6 @@ function AddItemPage() {
         ...prevFormData,
         image_url: response.data.path,
       }));
-      alert("Image uploaded successfully");
     } catch (error) {
       console.error(
         "Error uploading image:",
@@ -97,7 +96,6 @@ function AddItemPage() {
       });
       setImage(null);
       setPreviewURL(placeholderImage);
-      alert("Item added successfully");
     } catch (e) {
       console.error(
         "Error adding item:",

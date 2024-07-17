@@ -20,7 +20,7 @@ export async function seed(knex) {
     },
     {
       id: 3,
-      name: "Coay winter outfit",
+      name: "Cozy winter outfit",
       date: "2024-07-12",
       description: "Winter outfit with a wool coat and ankle boots.",
       clothing_item_ids: JSON.stringify([13, 15]),

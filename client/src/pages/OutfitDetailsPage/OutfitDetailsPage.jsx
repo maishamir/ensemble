@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import ImageSlider from "../../component/ImageSlider/ImageSlider";
+import "./OutfitDetailsPage.scss";
+import backIcon from "../../assets/arrow-ios-back.svg";
+import { Link } from "react-router-dom";
+
+
 
 function OutfitDetailsPage() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [outfit, setOutfit] = useState(null);
 
@@ -18,24 +25,43 @@ function OutfitDetailsPage() {
     fetchOutfit();
   }, [id]);
 
+  const handleEditOutfit = (outfit) => {
+    navigate(`/planner/${id}`, {state: {outfit}})
+  }
+
   if (!outfit) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="outfit-details">
-      <img src={outfit.thumbnail} alt={outfit.name} className="outfit-details__image" />
-      <h2 className="outfit-details__name">{outfit.name}</h2>
-      <p className="outfit-details__description">{outfit.description}</p>
-      <div className="outfit-details__items">
-        {outfit.clothing_items.map(item => (
-          <div key={item.id} className="outfit-details__item">
-            <img src={item.image_url} alt={item.name} className="outfit-details__item-image" />
-            <p className="outfit-details__item-name">{item.name}</p>
-          </div>
-        ))}
+    <>
+      {/* <Link to="/closet/Outfits">
+        {" "}
+        <img
+          src={backIcon}
+          alt="back arrow"
+          className="outfit-details__back-link"
+        />
+      </Link> */}
+      <div className="outfit-details">
+        <Link to="/closet/Outfits">
+        {" "}
+        <img
+          src={backIcon}
+          alt="back arrow"
+          className="outfit-details__back-link"
+        />
+      </Link>
+        <div className="outfit-details__items">
+          <ImageSlider slides={outfit.clothing_items} />
+        </div>
+        <div class="outfit-details__info">
+          <h2 className="outfit-details__name">{outfit.name}</h2>
+          <p className="outfit-details__description">{outfit.description}</p>
+          <button onClick={() => handleEditOutfit(outfit)} className="outfit-details__edit">Edit</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

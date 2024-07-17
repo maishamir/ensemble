@@ -21,7 +21,7 @@ function RecentOutfits() {
   }, []);
   return (
     <section className="recent-outfits">
-      {/* <p className="recent-outfits__title">Recent Outfits</p> */}
+      <p className="recent-outfits__title">Recent Outfits</p>
       <div className="recent-outfits__images">
         {recentOutfits.map((item) => (
           <Link to={`/outfit/${item.id}`}>
@@ -31,6 +31,7 @@ function RecentOutfits() {
               name={item.name}
               key={item.id}
             />
+            <div className="recent-outfits__item-name">{item.name}</div>
           </Link>
         ))}
       </div>

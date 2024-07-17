@@ -36,20 +36,20 @@ function ClosetPage() {
     const fetchOutfits = async () => {
       try {
         const { data } = await axios.get("http://localhost:3000/outfit");
-        setOutfits(data)
+        setOutfits(data);
       } catch (e) {
         console.error("Could not fetch outfits: ", e);
       }
     };
     fetchItems();
-    fetchOutfits()
+    fetchOutfits();
   }, [category]);
 
   const filterClothes = (category, itemsList = items) => {
     if (category === "All Items") {
       setFilteredItems(itemsList);
     } else if (category === "Outfits") {
-      setFilteredItems([])
+      setFilteredItems([]);
     } else {
       const filtered = itemsList.filter(
         (item) => item.category.toLowerCase() === category.toLowerCase()
@@ -79,23 +79,35 @@ function ClosetPage() {
       <div className="results">
         {category === "Outfits" ? (
           <div class="closet-page__outfits">
-            {outfits.map(outfit => (
-              <div class="outfit" key={outfit.id} onClick={() => navigate(`/outfit/${outfit.id}`)}>
-                <img src={outfit.thumbnail} alt="" class="closet-page__outfit"/>
+            {outfits.map((outfit) => (
+              <div
+                class="outfit"
+                key={outfit.id}
+                onClick={() => navigate(`/outfit/${outfit.id}`)}
+              >
+                <img
+                  src={outfit.thumbnail}
+                  alt=""
+                  class="closet-page__outfit"
+                />
+
+                <div className="recent-outfits__item-name">{outfit.name}</div>
               </div>
             ))}
           </div>
-        ) : <div className="closet-page__results">
-          {filteredItems.map((item) => (
-            <img src={item.image_url}
-              alt={item.name}
-              onClick={() => navigate(`/item/${item.id}`)}
-              key={item.id}
-              className="closet-page__item"
-            />
-          ))}
-        </div>}
-        
+        ) : (
+          <div className="closet-page__results">
+            {filteredItems.map((item) => (
+              <img
+                src={item.image_url}
+                alt={item.name}
+                onClick={() => navigate(`/item/${item.id}`)}
+                key={item.id}
+                className="closet-page__item"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

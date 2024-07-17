@@ -20,6 +20,7 @@ function App() {
           <Route path="/closet/:category" element={<ClosetPage />} />
           <Route path="/closet" element={<ClosetPage />} />
           <Route path="/item/:id" element={<ItemDetailsPage />} />
+          <Route path="/planner/:id" element={<PlannerPage />} />
           <Route path="/planner" element={<PlannerPage />} />
           <Route path="/add-item" element={<AddItemPage />} />
           <Route path="/outfit/:id" element={<OutfitDetailsPage />} />

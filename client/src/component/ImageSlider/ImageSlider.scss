@@ -1,0 +1,47 @@
+@use "../../assets/styles/partials/globals" as *;
+@use "../../assets/styles/partials/mixins" as *;
+@use "../../assets/styles/partials/typography" as *;
+@use "../../assets/styles/partials/variables" as *;
+
+.image-slider {
+    height: 100%;
+    position: relative;
+    
+    &__left-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: 2rem;
+        
+        z-index: 1;
+        cursor: pointer;
+
+        img {
+            width: 2rem;
+        }
+    }
+    &__right-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        right: 2rem;
+        z-index: 1;
+        cursor: pointer;
+
+        img {
+            width: 2rem;
+            transform: scaleX(-1);
+        }
+    }
+
+    &__marker-container {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    &__marker {
+        font-size: 2rem;
+        cursor: pointer;
+    }
+}

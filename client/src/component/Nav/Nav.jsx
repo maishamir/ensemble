@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Nav.scss";
 
 function Nav() {
   return (
     <header className="nav">
-      <h1 className="nav__logo">ensemble</h1>
+      <h1 className="nav__logo"><Link to="/">ensemble</Link></h1>
       <div className="nav__links">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/closet">Closet</NavLink>
