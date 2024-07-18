@@ -1,21 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./PlannerPage.scss";
 
-function PlannerPage() {
+function EditOutfitPage() {
   const categories = [
     "All Items",
-    "Tops",
-    "Sweaters",
-    "Bottoms",
-    "Skirts",
-    "Dresses",
+    "Top",
+    "Bottom",
+    "Dress",
     "Footwear",
-    "Outerwear",
-    "Loungewear",
-    "Accessories",
-  ]; 
+    "Accessory",
+  ]; // Define categories array
 
   const { id } = useParams();
   const [items, setItems] = useState([]);
@@ -24,7 +19,7 @@ function PlannerPage() {
   const [outfitDescription, setOutfitDescription] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All Items");
-  const [errorMessage, setErrorMessage] = useState("")
+  const [outfit, setOutfit] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,13 +27,28 @@ function PlannerPage() {
       try {
         const { data } = await axios.get("http://localhost:3000/clothing_item");
         setItems(data);
-        filterClothes(selectedCategory, data); // Initialize with the selected category filter
+        filterClothes("All Items", data); // Initialize with "All Items" filter
       } catch (e) {
         console.error("Could not fetch items:", e);
       }
     };
+
+    const fetchOutfit = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:3000/outfit/${id}`);
+        setOutfit(data);
+        setOutfitName(data.name);
+        setOutfitDescription(data.description);
+        setSelectedItems(data.clothing_items);
+      } catch (e) {
+        console.error("Could not fetch outfit data: ", e);
+      }
+    };
     fetchItems();
-  }, [selectedCategory]); // Only re-fetch items when the selected category changes
+    if (id) {
+      fetchOutfit();
+    }
+  }, [id]);
 
   const filterClothes = (category, itemsList = items) => {
     if (category === "All Items") {
@@ -46,7 +56,8 @@ function PlannerPage() {
     } else {
       const filtered = itemsList.filter(
         (item) =>
-          item.category && item.category.toLowerCase() === category.toLowerCase()
+          item.category &&
+          item.category.toLowerCase() === category.toLowerCase()
       );
       setFilteredItems(filtered);
     }
@@ -58,7 +69,6 @@ function PlannerPage() {
     } else {
       setSelectedItems([...selectedItems, item]);
     }
-    setErrorMessage("")
   };
 
   const handleSelectCategory = (e) => {
@@ -70,11 +80,7 @@ function PlannerPage() {
   const handleSaveOutfit = async (e) => {
     e.preventDefault();
     if (!outfitName) {
-      setErrorMessage("Please enter a name for your outfit.");
-      return;
-    }
-    if (selectedItems.length === 0) {
-      setErrorMessage("Please select items before saving your outfit.");
+      alert("Please enter a name for your outfit.");
       return;
     }
 
@@ -87,7 +93,7 @@ function PlannerPage() {
     }
 
     try {
-      await axios.post("http://localhost:3000/outfit", {
+      const response = await axios.put(`http://localhost:3000/outfit/${id}`, {
         name: outfitName,
         date: new Date().toISOString().slice(0, 19).replace("T", " "),
         description: outfitDescription,
@@ -98,7 +104,7 @@ function PlannerPage() {
       setOutfitName("");
       setOutfitDescription("");
       setSelectedItems([]);
-      navigate('/closet/Outfits');
+      navigate(`/outfit/${id}`);
     } catch (error) {
       console.error("Couldn't save outfit: ", error);
     }
@@ -154,20 +160,21 @@ function PlannerPage() {
       </section>
 
       <form className="outfit-planner__form" onSubmit={handleSaveOutfit}>
-        {(errorMessage !== "") ? <p className="outfit-planner__error">{errorMessage}</p> : null }
         <input
           type="text"
           value={outfitName}
           onChange={(e) => setOutfitName(e.target.value)}
           placeholder="Outfit Name"
           className="outfit-planner__name"
-        /> <br/>
+        />{" "}
+        <br />
         <textarea
           value={outfitDescription}
           onChange={(e) => setOutfitDescription(e.target.value)}
           placeholder="Description"
           className="outfit-planner__description"
-        ></textarea> <br />
+        ></textarea>{" "}
+        <br />
         <button type="submit" className="outfit-planner__button">
           Save Outfit
         </button>
@@ -176,4 +183,4 @@ function PlannerPage() {
   );
 }
 
-export default PlannerPage;
+export default EditOutfitPage;

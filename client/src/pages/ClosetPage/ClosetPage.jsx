@@ -6,13 +6,17 @@ import ItemCard from "../../component/itemCard/ItemCard";
 
 const categories = [
   "All Items",
-  "Top",
-  "Bottom",
-  "Dress",
+  "Tops",
+  "Sweaters",
+  "Bottoms",
+  "Skirts",
+  "Dresses",
   "Footwear",
-  "Accessory",
+  "Outerwear",
+  "Loungewear",
+  "Accessories",
   "Outfits",
-]; // Define categories array
+];
 
 function ClosetPage() {
   const navigate = useNavigate();

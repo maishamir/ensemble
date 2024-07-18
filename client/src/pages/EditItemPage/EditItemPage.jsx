@@ -1,23 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./AddItemPage.scss";
+import { useParams, useNavigate } from "react-router-dom";
 
-const placeholderImage =
-  "https://i.pinimg.com/564x/dd/67/97/dd67971d934cd5c9ad01887b5486481e.jpg";
-const categories = [
-    "All Items",
-    "Tops",
-    "Sweaters",
-    "Pants",
-    "Skirts",
-    "Dresses",
-    "Footwear",
-    "Outerwear",
-    "Loungewear",
-    "Accessories",
-  ];  ["Top", "Bottom", "Footwear", "Accessory", "Dress"];
-
-function AddItemPage() {
+function EditItemPage() {
+  const categories = ["Top", "Bottom", "Footwear", "Accessory", "Dress"];
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -25,7 +11,27 @@ function AddItemPage() {
     image_url: "",
   });
   const [image, setImage] = useState(null);
-  const [previewURL, setPreviewURL] = useState(placeholderImage);
+  const { id } = useParams();
+  const [previewURL, setPreviewURL] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchItem = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:3000/clothing_item/${id}`);
+        setFormData({
+          name: data.name,
+          category: data.category,
+          size: data.size,
+          image_url: data.image_url,
+        });
+        setPreviewURL(data.image_url); // Ensure this is the correct field for the image URL
+      } catch (e) {
+        console.error("Could not fetch item data: ", e);
+      }
+    };
+    fetchItem();
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,12 +52,12 @@ function AddItemPage() {
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      setPreviewURL(placeholderImage);
+      setPreviewURL(formData.image_url);
     }
   };
 
   const handleImageUpload = async (clothingItemId) => {
-    if (!image) return;
+    if (!image) return formData.image_url; // Return existing image URL if no new image is uploaded
 
     const imageData = new FormData();
     imageData.append("file", image);
@@ -67,10 +73,7 @@ function AddItemPage() {
           },
         }
       );
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        image_url: response.data.path,
-      }));
+      return response.data.path;
     } catch (error) {
       console.error(
         "Error uploading image:",
@@ -82,33 +85,22 @@ function AddItemPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // First, create the clothing item
-      const newItemResponse = await axios.post(
-        "http://localhost:3000/clothing_item",
-        {
-          name: formData.name,
-          category: formData.category,
-          size: formData.size,
-        }
-      );
+      let imagePath = formData.image_url;
+      if (image) {
+        imagePath = await handleImageUpload(id);
+      }
 
-      const clothingItemId = newItemResponse.data.id;
-
-      // Then, upload the image with the clothingItemId
-      await handleImageUpload(clothingItemId);
-
-      // Reset the form
-      setFormData({
-        name: "",
-        category: "",
-        size: "",
-        image_url: "",
+      await axios.put(`http://localhost:3000/clothing_item/${id}`, {
+        name: formData.name,
+        category: formData.category,
+        size: formData.size,
+        image_url: imagePath,
       });
-      setImage(null);
-      setPreviewURL(placeholderImage);
+
+      navigate(`/item/${id}`);
     } catch (e) {
       console.error(
-        "Error adding item:",
+        "Error updating item:",
         e.response ? e.response.data : e.message
       );
     }
@@ -116,14 +108,10 @@ function AddItemPage() {
 
   return (
     <main className="add-item-page">
-      <h1 className="add-item-page__title">Add a new item</h1>
+      <h1 className="add-item-page__title">Edit Item</h1>
       <div className="add-item">
         <div className="add-item__preview-container">
-          <img
-            src={previewURL}
-            alt="Preview"
-            className="add-item__preview"
-          />
+          <img src={previewURL} alt="Preview" className="add-item__preview" />
         </div>
         <form className="add-item__form" onSubmit={handleSubmit}>
           <div className="add-item__field">
@@ -175,7 +163,7 @@ function AddItemPage() {
             />
           </div>
           <button className="add-item__button" type="submit">
-            Add Item
+            Update Item
           </button>
         </form>
       </div>
@@ -183,4 +171,4 @@ function AddItemPage() {
   );
 }
 
-export default AddItemPage;
+export default EditItemPage;

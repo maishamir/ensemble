@@ -8,6 +8,8 @@ import PlannerPage from "./pages/PlannerPage/PlannerPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 import OutfitDetailsPage from "./pages/OutfitDetailsPage/OutfitDetailsPage";
+import EditOutfitPage from "./pages/EditOutfitPage/EditOutfitPage"
+import EditItemPage from "./pages/EditItemPage/EditItemPage";
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
           <Route path="/closet/:category" element={<ClosetPage />} />
           <Route path="/closet" element={<ClosetPage />} />
           <Route path="/item/:id" element={<ItemDetailsPage />} />
-          <Route path="/planner/:id" element={<PlannerPage />} />
+          <Route path="/edit-item/:id" element={<EditItemPage />} />
+          <Route path="/edit-outfit/:id" element={<EditOutfitPage />} />
           <Route path="/planner" element={<PlannerPage />} />
           <Route path="/add-item" element={<AddItemPage />} />
           <Route path="/outfit/:id" element={<OutfitDetailsPage />} />
