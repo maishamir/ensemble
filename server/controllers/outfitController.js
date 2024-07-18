@@ -15,6 +15,7 @@ const createOutfit = async (req, res) => {
       clothing_item_ids,  // Assuming clothing_item_ids is already an array and knex will handle it correctly
       thumbnail,
       name,
+      created_at: knex.fn.now()
     });
 
     res.status(201).json({ id });
@@ -39,7 +40,7 @@ const getRecentOutfits = async (req, res) => {
 
 const getOutfits = async (req, res) => {
   try {
-    const outfits = await knex('outfit').select('*');
+    const outfits = await knex('outfit').orderBy('created_at', 'desc');
     res.status(200).json(outfits);
   } catch (e) {
     console.error(`Error retrieving outfits: ${e}`);
@@ -69,11 +70,6 @@ const getOutfitById = async (req, res) => {
     res.status(500).json({ message: `Error retrieving outfit: ${e.message}` });
   }
 };
-
-
-
-
-
 
 const updateOutfit = async (req, res) => {
   try {

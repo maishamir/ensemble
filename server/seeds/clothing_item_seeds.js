@@ -5,7 +5,7 @@ export async function seed(knex) {
     {
       id: 1,
       name: "Cotton Blue T-Shirt",
-      category: "Top",
+      category: "Tops",
       size: "M",
       image_url:
         "https://i.pinimg.com/564x/0c/43/fa/0c43fa5cc8d7e82a2112806ea558b72b.jpg",
@@ -13,7 +13,7 @@ export async function seed(knex) {
     {
       id: 2,
       name: "Clara Baggy Low-Rise Organic Jeans",
-      category: "Bottom",
+      category: "Bottoms",
       size: "32",
       image_url:
         "https://i.pinimg.com/originals/18/89/9e/18899ef61efe347c20e10bf0de973654.jpg",
@@ -29,7 +29,7 @@ export async function seed(knex) {
     {
       id: 4,
       name: "Liliana Red Taffeta",
-      category: "Dress",
+      category: "Dresses",
       size: "L",
       image_url:
         "https://i.pinimg.com/originals/7d/dc/fd/7ddcfd9c30ace768131c877df8ed6276.jpg",
@@ -37,7 +37,7 @@ export async function seed(knex) {
     {
       id: 5,
       name: "Silver Long Clutch Evening Wallet",
-      category: "Accessory",
+      category: "Accessories",
       size: "One-Size",
       image_url:
         "https://i.pinimg.com/564x/7f/b1/12/7fb1121d59fd4bd24c92df173fd430fb.jpg",
@@ -45,7 +45,7 @@ export async function seed(knex) {
     {
       id: 6,
       name: "Floral Summer Dress",
-      category: "Dress",
+      category: "Dresses",
       size: "S",
       image_url:
         "https://i.pinimg.com/564x/7c/04/61/7c0461f9b34158462ccebc70beeb4a0b.jpg",
@@ -61,7 +61,7 @@ export async function seed(knex) {
     {
       id: 8,
       name: "Black Leather Jacket",
-      category: "Top",
+      category: "Outerwear",
       size: "L",
       image_url:
         "https://i.pinimg.com/564x/28/80/7f/28807f4f511ddbc8897ba3c6721f52ca.jpg",
@@ -69,7 +69,7 @@ export async function seed(knex) {
     {
       id: 9,
       name: "Boho Maxi Skirt",
-      category: "Bottom",
+      category: "Skirts",
       size: "M",
       image_url:
         "https://i.pinimg.com/736x/9d/de/76/9dde760e09ca02a290c91d3e6e18859d.jpg",
@@ -77,7 +77,7 @@ export async function seed(knex) {
     {
       id: 10,
       name: "Straw Sun Hat",
-      category: "Accessory",
+      category: "Accessories",
       size: "One-Size",
       image_url:
         "https://i.pinimg.com/564x/09/d0/00/09d0008b98a5b67ee749a0809d134ab4.jpg",
@@ -85,7 +85,7 @@ export async function seed(knex) {
     {
       id: 11,
       name: "Vintage Denim Shorts",
-      category: "Bottom",
+      category: "Bottoms",
       size: "S",
       image_url:
         "https://i.pinimg.com/564x/17/4f/0a/174f0a1bad3b86da9290f94a01c3d425.jpg",
@@ -93,7 +93,7 @@ export async function seed(knex) {
     {
       id: 12,
       name: "Polka Dot Blouse",
-      category: "Top",
+      category: "Tops",
       size: "M",
       image_url:
         "https://i.pinimg.com/564x/54/bb/74/54bb7439ff1ed9b8c24fd1771dfe00a4.jpg",
@@ -101,7 +101,7 @@ export async function seed(knex) {
     {
       id: 13,
       name: "Winter Wool Coat",
-      category: "Top",
+      category: "Outerwear",
       size: "XL",
       image_url:
         "https://i.pinimg.com/736x/d0/f1/64/d0f164041939f814b207530c97f1f8d9.jpg",
@@ -109,7 +109,7 @@ export async function seed(knex) {
     {
       id: 14,
       name: "Elegant Evening Gown",
-      category: "Dress",
+      category: "Dresses",
       size: "M",
       image_url:
         "https://i.pinimg.com/564x/b5/ad/02/b5ad0245a81999a8366b1ed5f4ed9a6b.jpg",
@@ -133,7 +133,7 @@ export async function seed(knex) {
     {
       id: 17,
       name: "Graphic Tee",
-      category: "Top",
+      category: "Tops",
       size: "S",
       image_url:
         "https://i.pinimg.com/564x/0a/88/1a/0a881a9c2f70c0365b54d2fa192dce64.jpg",
@@ -141,7 +141,7 @@ export async function seed(knex) {
     {
       id: 18,
       name: "Puffer Jacket",
-      category: "Top",
+      category: "Outerwear",
       size: "M",
       image_url:
         "https://i.pinimg.com/564x/4c/40/3a/4c403a046bbbb6c167a31ea1003cfb83.jpg",
@@ -149,7 +149,7 @@ export async function seed(knex) {
     {
       id: 19,
       name: "Khaki Cargo Pants",
-      category: "Bottom",
+      category: "Bottoms",
       size: "L",
       image_url:
         "https://i.pinimg.com/564x/16/c9/e9/16c9e9092f802e53d758c3eba2e90e44.jpg",
@@ -162,5 +162,37 @@ export async function seed(knex) {
       image_url:
         "https://i.pinimg.com/564x/79/83/ac/7983acca34b2b1d86f3d77238f1ebb5a.jpg",
     },
+    {
+      id: 21,
+      name: "Vintage Leaf Cotton Lapel Loungewear Set",
+      category: "Loungewear",
+      size: "M",
+      image_url:
+        "https://i.pinimg.com/564x/53/ae/94/53ae94956c9f3095dde6388b0f574ae1.jpg",
+    },
+    {
+      id: 22,
+      name: "Oversized knitted sweater",
+      category: "Sweaters",
+      size: "M",
+      image_url:
+        "https://i.pinimg.com/564x/1b/3f/25/1b3f255eedca276114c5ee779db3063d.jpg",
+    },
+    {
+      id: 23,
+      name: "Daisy Print Retro Sweater",
+      category: "Sweaters",
+      size: "M",
+      image_url:
+        "https://i.pinimg.com/736x/a4/0f/af/a40faf9e616d5a6f1a4151bf87fea9f2.jpg",
+    },
+    {
+      id: 24,
+      name: "Brown Wool Skirt",
+      category: "Skirts",
+      size: "M",
+      image_url: "https://i.pinimg.com/564x/59/bc/79/59bc79277e5d5c14901a4bf58301c668.jpg"
+    },
+
   ]);
 }
